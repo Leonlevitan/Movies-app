@@ -1,20 +1,21 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { get } from "../ultils/httpClient";
-import movie from "./movie.json";
 import styles from "./MovieDetails.module.css";
 
 export function MovieDetails() {
-    const {movieId}= useParams();
-    const [movie, setMovie] = useState(null)
-    
-useEffect(()=>{
-  get("/movie/"+movieId ).then(data => {
-    setMovie(data)
-  })
-},[movieId])
+  const { movieId } = useParams();
+  const [movie, setMovie] = useState(null);
 
-if(!movie){return null};
+  useEffect(() => {
+    get("/movie/" + movieId).then((data) => {
+      setMovie(data);
+    });
+  }, [movieId]);
+
+  if (!movie) {
+    return null;
+  }
 
   const imageUrl = "https://image.tmdb.org/t/p/w300" + movie.poster_path;
   return (
